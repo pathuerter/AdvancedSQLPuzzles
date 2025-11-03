@@ -1,53 +1,43 @@
-/*----------------------------------------------------
-Scott Peters
-DDL for Advanced SQL Puzzles
-https://advancedsqlpuzzles.com
-Last Updated 08/21/2025
-Microsoft SQL Server T-SQL
-
-*/----------------------------------------------------
 SET NOCOUNT ON;
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #1
-Shopping Carts
-*/----------------------------------------------------
-       
-
-DROP TABLE IF EXISTS #Cart1;
-DROP TABLE IF EXISTS #Cart2;
+----------------------------------------------------
+-- DDL for Puzzle #1: Shopping Carts
+----------------------------------------------------
+DROP TABLE IF EXISTS Cart1;
+DROP TABLE IF EXISTS Cart2;
 GO
 
-CREATE TABLE #Cart1
+CREATE TABLE Cart1
 (
 Item  VARCHAR(100) PRIMARY KEY
 );
 GO
 
-CREATE TABLE #Cart2
+CREATE TABLE Cart2
 (
 Item  VARCHAR(100) PRIMARY KEY
 );
 GO
 
-INSERT INTO #Cart1 (Item) VALUES
+INSERT INTO Cart1 (Item) VALUES
 ('Sugar'),('Bread'),('Juice'),('Soda'),('Flour');
 GO
 
-INSERT INTO #Cart2 (Item) VALUES
+INSERT INTO Cart2 (Item) VALUES
 ('Sugar'),('Bread'),('Butter'),('Cheese'),('Fruit');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #2
-Managers and Employees
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Employees;
+----------------------------------------------------
+-- DDL for Puzzle #2: Managers and Employees
+----------------------------------------------------
+-- Note: The original DDL had an INSERT into 'Employees' 
+-- but a DROP TABLE IF EXISTS #Employees.
+-- I'm assuming the table name should be 'Employees' (permanent).
+DROP TABLE IF EXISTS Employees;
 GO
 
-CREATE TABLE #Employees
+CREATE TABLE Employees
 (
 EmployeeID  INTEGER PRIMARY KEY,
 ManagerID   INTEGER NULL,
@@ -55,21 +45,19 @@ JobTitle    VARCHAR(100) NOT NULL
 );
 GO
 
-INSERT INTO #Employees (EmployeeID, ManagerID, JobTitle) VALUES
+INSERT INTO Employees (EmployeeID, ManagerID, JobTitle) VALUES
 (1001,NULL,'President'),(2002,1001,'CEO'),
 (3003,1001,'Office Manager'),(4004,2002,'Engineer'),
 (5005,2002,'Engineer'),(6006,2002,'Engineer');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #3
-Fiscal Year Table Constraints
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #EmployeePayRecords;
+----------------------------------------------------
+-- DDL for Puzzle #3: Fiscal Year Table Constraints
+----------------------------------------------------
+DROP TABLE IF EXISTS EmployeePayRecords;
 GO
 
-CREATE TABLE #EmployeePayRecords
+CREATE TABLE EmployeePayRecords
 (
 EmployeeID  INTEGER,
 FiscalYear  INTEGER,
@@ -79,15 +67,13 @@ PayRate     MONEY
 );
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #4
-Two Predicates
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
+----------------------------------------------------
+-- DDL for Puzzle #4: Two Predicates
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders;
 GO
 
-CREATE TABLE #Orders
+CREATE TABLE Orders
 (
 CustomerID     INTEGER,
 OrderID        INTEGER,
@@ -97,21 +83,19 @@ PRIMARY KEY (CustomerID, OrderID)
 );
 GO
 
-INSERT INTO #Orders (CustomerID, OrderID, DeliveryState, Amount) VALUES
+INSERT INTO Orders (CustomerID, OrderID, DeliveryState, Amount) VALUES
 (1001,1,'CA',340),(1001,2,'TX',950),(1001,3,'TX',670),
 (1001,4,'TX',860),(2002,5,'WA',320),(3003,6,'CA',650),
 (3003,7,'CA',830),(4004,8,'TX',120);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #5
-Phone Directory
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #PhoneDirectory;
+----------------------------------------------------
+-- DDL for Puzzle #5: Phone Directory
+----------------------------------------------------
+DROP TABLE IF EXISTS PhoneDirectory;
 GO
 
-CREATE TABLE #PhoneDirectory
+CREATE TABLE PhoneDirectory
 (
 CustomerID   INTEGER,
 [Type]       VARCHAR(100),
@@ -120,7 +104,7 @@ PRIMARY KEY (CustomerID, [Type])
 );
 GO
 
-INSERT INTO #PhoneDirectory (CustomerID, [Type], PhoneNumber) VALUES
+INSERT INTO PhoneDirectory (CustomerID, [Type], PhoneNumber) VALUES
 (1001,'Cellular','555-897-5421'),
 (1001,'Work','555-897-6542'),
 (1001,'Home','555-698-9874'),
@@ -129,15 +113,13 @@ INSERT INTO #PhoneDirectory (CustomerID, [Type], PhoneNumber) VALUES
 (3003,'Cellular','555-987-6541');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #6
-Workflow Steps
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #WorkflowSteps;
+----------------------------------------------------
+-- DDL for Puzzle #6: Workflow Steps
+----------------------------------------------------
+DROP TABLE IF EXISTS WorkflowSteps;
 GO
 
-CREATE TABLE #WorkflowSteps
+CREATE TABLE WorkflowSteps
 (
 Workflow        VARCHAR(100),
 StepNumber      INTEGER,
@@ -146,22 +128,20 @@ PRIMARY KEY (Workflow, StepNumber)
 );
 GO
 
-INSERT INTO #WorkflowSteps (Workflow, StepNumber, CompletionDate) VALUES
+INSERT INTO WorkflowSteps (Workflow, StepNumber, CompletionDate) VALUES
 ('Alpha',1,'7/2/2018'),('Alpha',2,'7/2/2018'),('Alpha',3,'7/1/2018'),
 ('Bravo',1,'6/25/2018'),('Bravo',2,NULL),('Bravo',3,'6/27/2018'),
 ('Charlie',1,NULL),('Charlie',2,'7/1/2018');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #7
-Mission to Mars
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Candidates;
-DROP TABLE IF EXISTS #Requirements;
+----------------------------------------------------
+-- DDL for Puzzle #7: Mission to Mars
+----------------------------------------------------
+DROP TABLE IF EXISTS Candidates;
+DROP TABLE IF EXISTS Requirements;
 GO
 
-CREATE TABLE #Candidates
+CREATE TABLE Candidates
 (
 CandidateID  INTEGER,
 Occupation   VARCHAR(100),
@@ -169,31 +149,29 @@ PRIMARY KEY (CandidateID, Occupation)
 );
 GO
 
-INSERT INTO #Candidates (CandidateID, Occupation) VALUES
+INSERT INTO Candidates (CandidateID, Occupation) VALUES
 (1001,'Geologist'),(1001,'Astrogator'),(1001,'Biochemist'),
 (1001,'Technician'),(2002,'Surgeon'),(2002,'Machinist'),
 (3003,'Cryologist'),(4004,'Selenologist');
 GO
 
-CREATE TABLE #Requirements
+CREATE TABLE Requirements
 (
 Requirement  VARCHAR(100) PRIMARY KEY
 );
 GO
 
-INSERT INTO #Requirements (Requirement) VALUES
+INSERT INTO Requirements (Requirement) VALUES
 ('Geologist'),('Astrogator'),('Technician');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #8
-Workflow Cases
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #WorkflowCases;
+----------------------------------------------------
+-- DDL for Puzzle #8: Workflow Cases
+----------------------------------------------------
+DROP TABLE IF EXISTS WorkflowCases;
 GO
 
-CREATE TABLE #WorkflowCases
+CREATE TABLE WorkflowCases
 (
 Workflow  VARCHAR(100) PRIMARY KEY,
 Case1     INTEGER NOT NULL DEFAULT 0,
@@ -202,19 +180,18 @@ Case3     INTEGER NOT NULL DEFAULT 0
 );
 GO
 
-INSERT INTO #WorkflowCases (Workflow, Case1, Case2, Case3) VALUES
+INSERT INTO WorkflowCases (Workflow, Case1, Case2, Case3) VALUES
 ('Alpha',0,0,0),('Bravo',0,1,1),('Charlie',1,0,0),('Delta',0,0,0);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #9
-Matching Sets
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Employees;
+----------------------------------------------------
+-- DDL for Puzzle #9: Matching Sets
+----------------------------------------------------
+DROP TABLE IF EXISTS EmployeeLicenses;
 GO
 
-CREATE TABLE #Employees
+-- Renamed from #Employees to prevent conflict with Puzzle #2
+CREATE TABLE EmployeeLicenses
 (
 EmployeeID  INTEGER,
 License     VARCHAR(100),
@@ -222,7 +199,7 @@ PRIMARY KEY (EmployeeID, License)
 );
 GO
 
-INSERT INTO #Employees (EmployeeID, License) VALUES
+INSERT INTO EmployeeLicenses (EmployeeID, License) VALUES
 (1001,'Class A'),(1001,'Class B'),(1001,'Class C'),
 (2002,'Class A'),(2002,'Class B'),(2002,'Class C'),
 (3003,'Class A'),(3003,'Class D'),
@@ -230,51 +207,47 @@ INSERT INTO #Employees (EmployeeID, License) VALUES
 (5005,'Class A'),(5005,'Class B'),(5005,'Class D');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #10
-Mean, Median, Mode and Range
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #SampleData;
+----------------------------------------------------
+-- DDL for Puzzle #10: Mean, Median, Mode and Range
+----------------------------------------------------
+DROP TABLE IF EXISTS SampleData10;
 GO
 
-CREATE TABLE #SampleData
+-- Renamed from #SampleData to prevent conflict with other puzzles
+CREATE TABLE SampleData10
 (
 IntegerValue  INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #SampleData (IntegerValue) VALUES
+INSERT INTO SampleData10 (IntegerValue) VALUES
 (5),(6),(10),(10),(13),(14),(17),(20),(81),(90),(76);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #11
-Permutations
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #TestCases;
+----------------------------------------------------
+-- DDL for Puzzle #11: Permutations
+----------------------------------------------------
+DROP TABLE IF EXISTS TestCases;
 GO
 
-CREATE TABLE #TestCases
+CREATE TABLE TestCases
 (
 TestCase  VARCHAR(1) PRIMARY KEY
 );
 GO
 
-INSERT INTO #TestCases (TestCase) VALUES
+INSERT INTO TestCases (TestCase) VALUES
 ('A'),('B'),('C');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #12
-Average Days
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #ProcessLog;
+----------------------------------------------------
+-- DDL for Puzzle #12: Average Days
+----------------------------------------------------
+DROP TABLE IF EXISTS ProcessLog12;
 GO
 
-CREATE TABLE #ProcessLog
+-- Renamed from #ProcessLog to prevent conflict with other puzzles
+CREATE TABLE ProcessLog12
 (
 WorkFlow       VARCHAR(100),
 ExecutionDate  DATE,
@@ -282,41 +255,38 @@ PRIMARY KEY (WorkFlow, ExecutionDate)
 );
 GO
 
-INSERT INTO #ProcessLog (WorkFlow, ExecutionDate) VALUES
+INSERT INTO ProcessLog12 (WorkFlow, ExecutionDate) VALUES
 ('Alpha','6/01/2018'),('Alpha','6/14/2018'),('Alpha','6/15/2018'),
 ('Bravo','6/1/2018'),('Bravo','6/2/2018'),('Bravo','6/19/2018'),
 ('Charlie','6/1/2018'),('Charlie','6/15/2018'),('Charlie','6/30/2018');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #13
-Inventory Tracking
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Inventory;
+----------------------------------------------------
+-- DDL for Puzzle #13: Inventory Tracking
+----------------------------------------------------
+DROP TABLE IF EXISTS Inventory;
 GO
 
-CREATE TABLE #Inventory
+CREATE TABLE Inventory
 (
 InventoryDate       DATE PRIMARY KEY,
 QuantityAdjustment  INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #Inventory (InventoryDate, QuantityAdjustment) VALUES
+INSERT INTO Inventory (InventoryDate, QuantityAdjustment) VALUES
 ('7/1/2018',100),('7/2/2018',75),('7/3/2018',-150),
 ('7/4/2018',50),('7/5/2018',-75);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #14
-Indeterminate Process Log
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #ProcessLog;
+----------------------------------------------------
+-- DDL for Puzzle #14: Indeterminate Process Log
+----------------------------------------------------
+DROP TABLE IF EXISTS ProcessLog14;
 GO
 
-CREATE TABLE #ProcessLog
+-- Renamed from #ProcessLog to prevent conflict with other puzzles
+CREATE TABLE ProcessLog14
 (
 Workflow    VARCHAR(100),
 StepNumber  INTEGER,
@@ -325,7 +295,7 @@ PRIMARY KEY (Workflow, StepNumber)
 );
 GO
 
-INSERT INTO #ProcessLog (Workflow, StepNumber, RunStatus) VALUES
+INSERT INTO ProcessLog14 (Workflow, StepNumber, RunStatus) VALUES
 ('Alpha',1,'Error'),('Alpha',2,'Complete'),('Alpha',3,'Running'),
 ('Bravo',1,'Complete'),('Bravo',2,'Complete'),
 ('Charlie',1,'Running'),('Charlie',2,'Running'),
@@ -333,42 +303,32 @@ INSERT INTO #ProcessLog (Workflow, StepNumber, RunStatus) VALUES
 ('Echo',1,'Running'),('Echo',2,'Complete');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #15
-Group Concatenation
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #DMLTable;
+----------------------------------------------------
+-- DDL for Puzzle #15: Group Concatenation
+----------------------------------------------------
+DROP TABLE IF EXISTS DMLTable;
 GO
 
-CREATE TABLE #DMLTable
+CREATE TABLE DMLTable
 (
 SequenceNumber  INTEGER PRIMARY KEY,
 String          VARCHAR(100) NOT NULL
 );
 GO
 
-INSERT INTO #DMLTable (SequenceNumber, String) VALUES
-(1,'SELECT'),
-(2,'Product,'),
-(3,'UnitPrice,'),
-(4,'EffectiveDate'),
-(5,'FROM'),
-(6,'Products'),
-(7,'WHERE'),
-(8,'UnitPrice'),
-(9,'> 100');
+INSERT INTO DMLTable (SequenceNumber, String) VALUES
+(1,'SELECT'),(2,'Product,'),(3,'UnitPrice,'),(4,'EffectiveDate'),
+(5,'FROM'),(6,'Products'),(7,'WHERE'),(8,'UnitPrice'),(9,'> 100');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #16
-Reciprocals
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #PlayerScores;
+----------------------------------------------------
+-- DDL for Puzzle #16: Reciprocals
+----------------------------------------------------
+DROP TABLE IF EXISTS PlayerScores16;
 GO
 
-CREATE TABLE #PlayerScores
+-- Renamed from #PlayerScores to prevent conflict with other puzzles
+CREATE TABLE PlayerScores16
 (
 PlayerA  INTEGER,
 PlayerB  INTEGER,
@@ -377,56 +337,50 @@ PRIMARY KEY (PlayerA, PlayerB)
 );
 GO
 
-INSERT INTO #PlayerScores (PlayerA, PlayerB, Score) VALUES
+INSERT INTO PlayerScores16 (PlayerA, PlayerB, Score) VALUES
 (1001,2002,150),(3003,4004,15),(4004,3003,125);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #17
-De-Grouping
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Ungroup;
+----------------------------------------------------
+-- DDL for Puzzle #17: De-Grouping
+----------------------------------------------------
+DROP TABLE IF EXISTS Ungroup;
 GO
 
-CREATE TABLE #Ungroup
+CREATE TABLE Ungroup
 (
 ProductDescription  VARCHAR(100) PRIMARY KEY,
 Quantity            INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #Ungroup (ProductDescription, Quantity) VALUES
+INSERT INTO Ungroup (ProductDescription, Quantity) VALUES
 ('Pencil',3),('Eraser',4),('Notebook',2);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #18
-Seating Chart
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #SeatingChart;
+----------------------------------------------------
+-- DDL for Puzzle #18: Seating Chart
+----------------------------------------------------
+DROP TABLE IF EXISTS SeatingChart;
 GO
 
-CREATE TABLE #SeatingChart
+CREATE TABLE SeatingChart
 (
 SeatNumber  INTEGER PRIMARY KEY
 );
 GO
 
-INSERT INTO #SeatingChart (SeatNumber) VALUES
+INSERT INTO SeatingChart (SeatNumber) VALUES
 (7),(13),(14),(15),(27),(28),(29),(30),(31),(32),(33),(34),(35),(52),(53),(54);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #19
-Back to the Future
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #TimePeriods;
+----------------------------------------------------
+-- DDL for Puzzle #19: Back to the Future
+----------------------------------------------------
+DROP TABLE IF EXISTS TimePeriods;
 GO
 
-CREATE TABLE #TimePeriods
+CREATE TABLE TimePeriods
 (
 StartDate  DATE,
 EndDate    DATE,
@@ -434,7 +388,7 @@ PRIMARY KEY (StartDate, EndDate)
 );
 GO
 
-INSERT INTO #TimePeriods (StartDate, EndDate) VALUES
+INSERT INTO TimePeriods (StartDate, EndDate) VALUES
 ('1/1/2018','1/5/2018'),
 ('1/3/2018','1/9/2018'),
 ('1/10/2018','1/11/2018'),
@@ -442,15 +396,13 @@ INSERT INTO #TimePeriods (StartDate, EndDate) VALUES
 ('1/15/2018','1/19/2018');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #20
-Price Points
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #ValidPrices;
+----------------------------------------------------
+-- DDL for Puzzle #20: Price Points
+----------------------------------------------------
+DROP TABLE IF EXISTS ValidPrices;
 GO
 
-CREATE TABLE #ValidPrices
+CREATE TABLE ValidPrices
 (
 ProductID      INTEGER,
 UnitPrice      MONEY,
@@ -459,7 +411,7 @@ PRIMARY KEY (ProductID, UnitPrice, EffectiveDate)
 );
 GO
 
-INSERT INTO #ValidPrices (ProductID, UnitPrice, EffectiveDate) VALUES
+INSERT INTO ValidPrices (ProductID, UnitPrice, EffectiveDate) VALUES
 (1001,1.99,'1/01/2018'),
 (1001,2.99,'4/15/2018'),
 (1001,3.99,'6/8/2018'),
@@ -467,15 +419,14 @@ INSERT INTO #ValidPrices (ProductID, UnitPrice, EffectiveDate) VALUES
 (2002,2.99,'5/19/2018');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #21
-Average Monthly Sales
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
+----------------------------------------------------
+-- DDL for Puzzle #21: Average Monthly Sales
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders21;
 GO
 
-CREATE TABLE #Orders
+-- Renamed from #Orders to prevent conflict with other puzzles
+CREATE TABLE Orders21
 (
 OrderID     INTEGER PRIMARY KEY,
 CustomerID  INTEGER NOT NULL,
@@ -485,31 +436,22 @@ Amount      MONEY NOT NULL,
 );
 GO
 
-INSERT INTO #Orders (OrderID, CustomerID, OrderDate, Amount, [State]) VALUES
-(1,1001,'1/1/2018',100,'TX'),
-(2,1001,'1/1/2018',150,'TX'),
-(3,1001,'1/1/2018',75,'TX'),
-(4,1001,'2/1/2018',100,'TX'),
-(5,1001,'3/1/2018',100,'TX'),
-(6,2002,'2/1/2018',75,'TX'),
-(7,2002,'2/1/2018',150,'TX'),
-(8,3003,'1/1/2018',100,'IA'),
-(9,3003,'2/1/2018',100,'IA'),
-(10,3003,'3/1/2018',100,'IA'),
-(11,4004,'4/1/2018',100,'IA'),
-(12,4004,'5/1/2018',50,'IA'),
+INSERT INTO Orders21 (OrderID, CustomerID, OrderDate, Amount, [State]) VALUES
+(1,1001,'1/1/2018',100,'TX'),(2,1001,'1/1/2018',150,'TX'),(3,1001,'1/1/2018',75,'TX'),
+(4,1001,'2/1/2018',100,'TX'),(5,1001,'3/1/2018',100,'TX'),(6,2002,'2/1/2018',75,'TX'),
+(7,2002,'2/1/2018',150,'TX'),(8,3003,'1/1/2018',100,'IA'),(9,3003,'2/1/2018',100,'IA'),
+(10,3003,'3/1/2018',100,'IA'),(11,4004,'4/1/2018',100,'IA'),(12,4004,'5/1/2018',50,'IA'),
 (13,4004,'5/1/2018',100,'IA');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #22
-Occurrences
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #ProcessLog;
+----------------------------------------------------
+-- DDL for Puzzle #22: Occurrences
+----------------------------------------------------
+DROP TABLE IF EXISTS ProcessLog22;
 GO
 
-CREATE TABLE #ProcessLog
+-- Renamed from #ProcessLog to prevent conflict with other puzzles
+CREATE TABLE ProcessLog22
 (
 Workflow     VARCHAR(100),
 LogMessage   VARCHAR(100),
@@ -518,47 +460,39 @@ PRIMARY KEY (Workflow, LogMessage)
 );
 GO
 
-INSERT INTO #ProcessLog (Workflow, LogMessage, Occurrences) VALUES
-('Alpha','Error: Conversion Failed',5),
-('Alpha','Status Complete',8),
-('Alpha','Error: Unidentified error occurred',9),
-('Bravo','Error: Cannot Divide by 0',3),
-('Bravo','Error: Unidentified error occurred',1),
-('Charlie','Error: Unidentified error occurred',10),
-('Charlie','Error: Conversion Failed',7),
-('Charlie','Status Complete',6);
+INSERT INTO ProcessLog22 (Workflow, LogMessage, Occurrences) VALUES
+('Alpha','Error: Conversion Failed',5),('Alpha','Status Complete',8),
+('Alpha','Error: Unidentified error occurred',9),('Bravo','Error: Cannot Divide by 0',3),
+('Bravo','Error: Unidentified error occurred',1),('Charlie','Error: Unidentified error occurred',10),
+('Charlie','Error: Conversion Failed',7),('Charlie','Status Complete',6);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #23
-Divide in Half
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #PlayerScores;
+----------------------------------------------------
+-- DDL for Puzzle #23: Divide in Half
+----------------------------------------------------
+DROP TABLE IF EXISTS PlayerScores23;
 GO
 
-CREATE TABLE #PlayerScores
+-- Renamed from #PlayerScores to prevent conflict with other puzzles
+CREATE TABLE PlayerScores23
 (
 PlayerID  INTEGER PRIMARY KEY,
 Score     INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #PlayerScores (PlayerID, Score) VALUES
-(1001,2343),(2002,9432),
-(3003,6548),(4004,1054),
-(5005,6832);
+INSERT INTO PlayerScores23 (PlayerID, Score) VALUES
+(1001,2343),(2002,9432),(3003,6548),(4004,1054),(5005,6832);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #24
-Page Views
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
+----------------------------------------------------
+-- DDL for Puzzle #24: Page Views (Orders)
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders24;
 GO
 
-CREATE TABLE #Orders
+-- Renamed from #Orders to prevent conflict with other puzzles
+CREATE TABLE Orders24
 (
 OrderID     INTEGER PRIMARY KEY,
 CustomerID  INTEGER NOT NULL,
@@ -568,31 +502,22 @@ Amount      MONEY NOT NULL,
 );
 GO
 
-INSERT INTO #Orders (OrderID, CustomerID, OrderDate, Amount, [State]) VALUES
-(1,1001,'1/1/2018',100,'TX'),
-(2,1001,'1/1/2018',150,'TX'),
-(3,1001,'1/1/2018',75,'TX'),
-(4,1001,'2/1/2018',100,'TX'),
-(5,1001,'3/1/2018',100,'TX'),
-(6,2002,'2/1/2018',75,'TX'),
-(7,2002,'2/1/2018',150,'TX'),
-(8,3003,'1/1/2018',100,'IA'),
-(9,3003,'2/1/2018',100,'IA'),
-(10,3003,'3/1/2018',100,'IA'),
-(11,4004,'4/1/2018',100,'IA'),
-(12,4004,'5/1/2018',50,'IA'),
+INSERT INTO Orders24 (OrderID, CustomerID, OrderDate, Amount, [State]) VALUES
+(1,1001,'1/1/2018',100,'TX'),(2,1001,'1/1/2018',150,'TX'),(3,1001,'1/1/2018',75,'TX'),
+(4,1001,'2/1/2018',100,'TX'),(5,1001,'3/1/2018',100,'TX'),(6,2002,'2/1/2018',75,'TX'),
+(7,2002,'2/1/2018',150,'TX'),(8,3003,'1/1/2018',100,'IA'),(9,3003,'2/1/2018',100,'IA'),
+(10,3003,'3/1/2018',100,'IA'),(11,4004,'4/1/2018',100,'IA'),(12,4004,'5/1/2018',50,'IA'),
 (13,4004,'5/1/2018',100,'IA');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #25
-Top Vendors
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
+----------------------------------------------------
+-- DDL for Puzzle #25: Top Vendors
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders25;
 GO
 
-CREATE TABLE #Orders
+-- Renamed from #Orders to prevent conflict with other puzzles
+CREATE TABLE Orders25
 (
 OrderID     INTEGER PRIMARY KEY,
 CustomerID  INTEGER NOT NULL,
@@ -601,31 +526,25 @@ Vendor      VARCHAR(100) NOT NULL
 );
 GO
 
-INSERT INTO #Orders (OrderID, CustomerID, [Count], Vendor) VALUES
-(1,1001,12,'Direct Parts'),
-(2,1001,54,'Direct Parts'),
-(3,1001,32,'ACME'),
-(4,2002,7,'ACME'),
-(5,2002,16,'ACME'),
-(6,2002,5,'Direct Parts');
+INSERT INTO Orders25 (OrderID, CustomerID, [Count], Vendor) VALUES
+(1,1001,12,'Direct Parts'),(2,1001,54,'Direct Parts'),(3,1001,32,'ACME'),
+(4,2002,7,'ACME'),(5,2002,16,'ACME'),(6,2002,5,'Direct Parts');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #26
-Previous Years Sales
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Sales;
+----------------------------------------------------
+-- DDL for Puzzle #26: Previous Years Sales
+----------------------------------------------------
+DROP TABLE IF EXISTS Sales;
 GO
 
-CREATE TABLE #Sales
+CREATE TABLE Sales
 (
 [Year]  INTEGER NOT NULL,
 Amount  INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #Sales ([Year], Amount) VALUES
+INSERT INTO Sales ([Year], Amount) VALUES
 (YEAR(GETDATE()),352645),
 (YEAR(DATEADD(YEAR,-1,GETDATE())),165565),
 (YEAR(DATEADD(YEAR,-1,GETDATE())),254654),
@@ -634,52 +553,48 @@ INSERT INTO #Sales ([Year], Amount) VALUES
 (YEAR(DATEADD(YEAR,-3,GETDATE())),111894);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #27
-Delete the Duplicates
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #SampleData;
+----------------------------------------------------
+-- DDL for Puzzle #27: Delete the Duplicates
+----------------------------------------------------
+DROP TABLE IF EXISTS SampleData27;
 GO
 
-CREATE TABLE #SampleData
+-- Renamed from #SampleData to prevent conflict with other puzzles
+CREATE TABLE SampleData27
 (
 IntegerValue  INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #SampleData (IntegerValue) VALUES
+INSERT INTO SampleData27 (IntegerValue) VALUES
 (1),(1),(2),(3),(3),(4);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #28
-Fill the Gaps
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Gaps;
+----------------------------------------------------
+-- DDL for Puzzle #28: Fill the Gaps
+----------------------------------------------------
+DROP TABLE IF EXISTS Gaps;
 GO
 
-CREATE TABLE #Gaps
+CREATE TABLE Gaps
 (
 RowNumber   INTEGER PRIMARY KEY,
 TestCase    VARCHAR(100) NULL
 );
 GO
 
-INSERT INTO #Gaps (RowNumber, TestCase) VALUES
+INSERT INTO Gaps (RowNumber, TestCase) VALUES
 (1,'Alpha'),(2,NULL),(3,NULL),(4,NULL),
 (5,'Bravo'),(6,NULL),(7,'Charlie'),(8,NULL),(9,NULL);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #29
-Count the Groupings
-*/----------------------------------------------------
-DROP TABLE IF EXISTS #Groupings;
+----------------------------------------------------
+-- DDL for Puzzle #29: Count the Groupings
+----------------------------------------------------
+DROP TABLE IF EXISTS Groupings;
 GO
 
-CREATE TABLE #Groupings
+CREATE TABLE Groupings
 (
 StepNumber  INTEGER PRIMARY KEY,
 TestCase    VARCHAR(100) NOT NULL,
@@ -687,63 +602,50 @@ TestCase    VARCHAR(100) NOT NULL,
 );
 GO
 
-INSERT INTO #Groupings (StepNumber, TestCase, [Status]) VALUES
-(1,'Test Case 1','Passed'),
-(2,'Test Case 2','Passed'),
-(3,'Test Case 3','Passed'),
-(4,'Test Case 4','Passed'),
-(5,'Test Case 5','Failed'),
-(6,'Test Case 6','Failed'),
-(7,'Test Case 7','Failed'),
-(8,'Test Case 8','Failed'),
-(9,'Test Case 9','Failed'),
-(10,'Test Case 10','Passed'),
-(11,'Test Case 11','Passed'),
-(12,'Test Case 12','Passed');
+INSERT INTO Groupings (StepNumber, TestCase, [Status]) VALUES
+(1,'Test Case 1','Passed'),(2,'Test Case 2','Passed'),(3,'Test Case 3','Passed'),
+(4,'Test Case 4','Passed'),(5,'Test Case 5','Failed'),(6,'Test Case 6','Failed'),
+(7,'Test Case 7','Failed'),(8,'Test Case 8','Failed'),(9,'Test Case 9','Failed'),
+(10,'Test Case 10','Passed'),(11,'Test Case 11','Passed'),(12,'Test Case 12','Passed');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #30
-Select Star
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Products;
+----------------------------------------------------
+-- DDL for Puzzle #30: Select Star
+----------------------------------------------------
+DROP TABLE IF EXISTS Products;
 GO
 
-CREATE TABLE #Products
+CREATE TABLE Products
 (
 ProductID    INTEGER PRIMARY KEY,
 ProductName  VARCHAR(100) NOT NULL
 );
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #31
-Second Highest
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #SampleData;
+----------------------------------------------------
+-- DDL for Puzzle #31: Second Highest
+----------------------------------------------------
+DROP TABLE IF EXISTS SampleData31;
 GO
 
-CREATE TABLE #SampleData
+-- Renamed from #SampleData to prevent conflict with other puzzles
+CREATE TABLE SampleData31
 (
 IntegerValue  INTEGER PRIMARY KEY
 );
 GO
 
-INSERT INTO #SampleData (IntegerValue) VALUES
+INSERT INTO SampleData31 (IntegerValue) VALUES
 (3759),(3760),(3761),(3762),(3763);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #32
-First and Last
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Personal;
+----------------------------------------------------
+-- DDL for Puzzle #32: First and Last
+----------------------------------------------------
+DROP TABLE IF EXISTS Personal;
 GO
 
-CREATE TABLE #Personal
+CREATE TABLE Personal
 (
 SpacemanID      INTEGER PRIMARY KEY,
 JobDescription  VARCHAR(100) NOT NULL,
@@ -751,22 +653,21 @@ MissionCount    INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #Personal (SpacemanID, JobDescription, MissionCount) VALUES
+INSERT INTO Personal (SpacemanID, JobDescription, MissionCount) VALUES
 (1001,'Astrogator',6),(2002,'Astrogator',12),(3003,'Astrogator',17),
 (4004,'Geologist',21),(5005,'Geologist',9),(6006,'Geologist',8),
 (7007,'Technician',13),(8008,'Technician',2),(9009,'Technician',7);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #33
-Deadlines
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
-DROP TABLE IF EXISTS #ManufacturingTimes;
+----------------------------------------------------
+-- DDL for Puzzle #33: Deadlines
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders33;
+DROP TABLE IF EXISTS ManufacturingTimes;
 GO
 
-CREATE TABLE #Orders
+-- Renamed from #Orders to prevent conflict with other puzzles
+CREATE TABLE Orders33
 (
 OrderID        INTEGER PRIMARY KEY,
 Product        VARCHAR(100) NOT NULL,
@@ -774,7 +675,7 @@ DaysToDeliver  INTEGER NOT NULL
 );
 GO
 
-CREATE TABLE #ManufacturingTimes
+CREATE TABLE ManufacturingTimes
 (
 Product            VARCHAR(100),
 Component          VARCHAR(100),
@@ -783,32 +684,25 @@ PRIMARY KEY (Product, Component)
 );
 GO
 
-INSERT INTO #Orders (OrderID, Product, DaysToDeliver) VALUES
-(1, 'Aurora', 7),
-(2, 'Twilight', 3),
-(3, 'SunRay', 9);
+INSERT INTO Orders33 (OrderID, Product, DaysToDeliver) VALUES
+(1, 'Aurora', 7),(2, 'Twilight', 3),(3, 'SunRay', 9);
 GO
 
-INSERT INTO #ManufacturingTimes (Product, Component, DaysToManufacture) VALUES
-('Aurora', 'Photon Coil', 7),
-('Aurora', 'Filament', 2),
-('Aurora', 'Shine Capacitor', 3),
-('Aurora', 'Glow Sphere', 1),
-('Twilight', 'Photon Coil', 7),
-('Twilight', 'Filament', 2),
-('SunRay', 'Shine Capacitor', 3),
-('SunRay', 'Photon Coil', 1);
+INSERT INTO ManufacturingTimes (Product, Component, DaysToManufacture) VALUES
+('Aurora', 'Photon Coil', 7),('Aurora', 'Filament', 2),
+('Aurora', 'Shine Capacitor', 3),('Aurora', 'Glow Sphere', 1),
+('Twilight', 'Photon Coil', 7),('Twilight', 'Filament', 2),
+('SunRay', 'Shine Capacitor', 3),('SunRay', 'Photon Coil', 1);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #34
-Specific Exclusion
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
+----------------------------------------------------
+-- DDL for Puzzle #34: Specific Exclusion
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders34;
 GO
 
-CREATE TABLE #Orders
+-- Renamed from #Orders to prevent conflict with other puzzles
+CREATE TABLE Orders34
 (
 OrderID     INTEGER PRIMARY KEY,
 CustomerID  INTEGER NOT NULL,
@@ -816,19 +710,18 @@ Amount      MONEY NOT NULL
 );
 GO
 
-INSERT INTO #Orders (OrderID, CustomerID, Amount) VALUES
+INSERT INTO Orders34 (OrderID, CustomerID, Amount) VALUES
 (1,1001,25),(2,1001,50),(3,2002,65),(4,3003,50);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #35
-International vs Domestic Sales
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Orders;
+----------------------------------------------------
+-- DDL for Puzzle #35: International vs Domestic Sales
+----------------------------------------------------
+DROP TABLE IF EXISTS Orders35;
 GO
 
-CREATE TABLE #Orders
+-- Renamed from #Orders to prevent conflict with other puzzles
+CREATE TABLE Orders35
 (
 InvoiceID   INTEGER PRIMARY KEY,
 SalesRepID  INTEGER NOT NULL,
@@ -837,16 +730,14 @@ SalesType   VARCHAR(100) NOT NULL
 );
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #36
-Traveling Salesman
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #TravelingSalesman;
-DROP TABLE IF EXISTS #Routes;
+----------------------------------------------------
+-- DDL for Puzzle #36: Traveling Salesman
+----------------------------------------------------
+DROP TABLE IF EXISTS TravelingSalesman;
+DROP TABLE IF EXISTS Routes;
 GO
 
-CREATE TABLE #Routes
+CREATE TABLE Routes
 (
 RouteID        INTEGER NOT NULL,
 DepartureCity  VARCHAR(30) NOT NULL,
@@ -856,22 +747,18 @@ PRIMARY KEY (DepartureCity, ArrivalCity)
 );
 GO
 
-INSERT INTO #Routes (RouteID, DepartureCity, ArrivalCity, Cost) VALUES
-(1,'Austin','Dallas',100),
-(2,'Dallas','Memphis',200),
-(3,'Memphis','Des Moines',300),
-(4,'Dallas','Des Moines',400);
+INSERT INTO Routes (RouteID, DepartureCity, ArrivalCity, Cost) VALUES
+(1,'Austin','Dallas',100),(2,'Dallas','Memphis',200),
+(3,'Memphis','Des Moines',300),(4,'Dallas','Des Moines',400);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #37
-Group Criteria Keys
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #GroupCriteria;
+----------------------------------------------------
+-- DDL for Puzzle #37: Group Criteria Keys
+----------------------------------------------------
+DROP TABLE IF EXISTS GroupCriteria;
 GO
 
-CREATE TABLE #GroupCriteria
+CREATE TABLE GroupCriteria
 (
 OrderID      INTEGER PRIMARY KEY,
 Distributor  VARCHAR(100) NOT NULL,
@@ -881,22 +768,18 @@ Amount       MONEY NOT NULL
 );
 GO
 
-INSERT INTO #GroupCriteria (OrderID, Distributor, Facility, [Zone], Amount) VALUES
-(1,'ACME',123,'ABC',100),
-(2,'ACME',123,'ABC',75),
-(3,'Direct Parts',789,'XYZ',150),
-(4,'Direct Parts',789,'XYZ',125);
+INSERT INTO GroupCriteria (OrderID, Distributor, Facility, [Zone], Amount) VALUES
+(1,'ACME',123,'ABC',100),(2,'ACME',123,'ABC',75),
+(3,'Direct Parts',789,'XYZ',150),(4,'Direct Parts',789,'XYZ',125);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #38
-Reporting Elements
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #RegionSales;
+----------------------------------------------------
+-- DDL for Puzzle #38: Reporting Elements
+----------------------------------------------------
+DROP TABLE IF EXISTS RegionSales;
 GO
 
-CREATE TABLE #RegionSales
+CREATE TABLE RegionSales
 (
 Region       VARCHAR(100),
 Distributor  VARCHAR(100),
@@ -905,66 +788,53 @@ PRIMARY KEY (Region, Distributor)
 );
 GO
 
-INSERT INTO #RegionSales (Region, Distributor, Sales) VALUES
-('North','ACE',10),
-('South','ACE',67),
-('East','ACE',54),
-('North','ACME',65),
-('South','ACME',9),
-('East','ACME',1),
-('West','ACME',7),
-('North','Direct Parts',8),
-('South','Direct Parts',7),
-('West','Direct Parts',12);
+INSERT INTO RegionSales (Region, Distributor, Sales) VALUES
+('North','ACE',10),('South','ACE',67),('East','ACE',54),
+('North','ACME',65),('South','ACME',9),('East','ACME',1),('West','ACME',7),
+('North','Direct Parts',8),('South','Direct Parts',7),('West','Direct Parts',12);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #39
-Prime Numbers
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #PrimeNumbers;
+----------------------------------------------------
+-- DDL for Puzzle #39: Prime Numbers
+----------------------------------------------------
+DROP TABLE IF EXISTS PrimeNumbers;
 GO
 
-CREATE TABLE #PrimeNumbers
+CREATE TABLE PrimeNumbers
 (
 IntegerValue  INTEGER PRIMARY KEY
 );
 GO
 
-INSERT INTO #PrimeNumbers (IntegerValue) VALUES
+INSERT INTO PrimeNumbers (IntegerValue) VALUES
 (1),(2),(3),(4),(5),(6),(7),(8),(9),(10);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #40
-Sort Order
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #SortOrder;
+----------------------------------------------------
+-- DDL for Puzzle #40: Sort Order
+----------------------------------------------------
+DROP TABLE IF EXISTS SortOrder;
 GO
 
-CREATE TABLE #SortOrder
+CREATE TABLE SortOrder
 (
 City  VARCHAR(100) PRIMARY KEY
 );
 GO
 
-INSERT INTO #SortOrder (City) VALUES
+INSERT INTO SortOrder (City) VALUES
 ('Atlanta'),('Baltimore'),('Chicago'),('Denver');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #41
-Associate IDs
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Associates;
-DROP TABLE IF EXISTS #Associates2;
-DROP TABLE IF EXISTS #Associates3;
+----------------------------------------------------
+-- DDL for Puzzle #41: Associate IDs
+----------------------------------------------------
+DROP TABLE IF EXISTS Associates;
+DROP TABLE IF EXISTS Associates2;
+DROP TABLE IF EXISTS Associates3;
 GO
 
-CREATE TABLE #Associates
+CREATE TABLE Associates
 (
 Associate1  VARCHAR(100),
 Associate2  VARCHAR(100),
@@ -972,20 +842,18 @@ PRIMARY KEY (Associate1, Associate2)
 );
 GO
 
-INSERT INTO #Associates (Associate1, Associate2) VALUES
+INSERT INTO Associates (Associate1, Associate2) VALUES
 ('Anne','Betty'),('Anne','Charles'),('Betty','Dan'),('Charles','Emma'),
 ('Francis','George'),('George','Harriet');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #42
-Mutual Friends
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Friends;
+----------------------------------------------------
+-- DDL for Puzzle #42: Mutual Friends
+----------------------------------------------------
+DROP TABLE IF EXISTS Friends;
 GO
 
-CREATE TABLE #Friends
+CREATE TABLE Friends
 (
 Friend1  VARCHAR(100),
 Friend2  VARCHAR(100),
@@ -993,20 +861,18 @@ PRIMARY KEY (Friend1, Friend2)
 );
 GO
 
-INSERT INTO #Friends (Friend1, Friend2) VALUES
+INSERT INTO Friends (Friend1, Friend2) VALUES
 ('Jason','Mary'),('Mike','Mary'),('Mike','Jason'),
 ('Susan','Jason'),('John','Mary'),('Susan','Mary');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #43
-Unbounded Preceding
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #CustomerOrders;
+----------------------------------------------------
+-- DDL for Puzzle #43: Unbounded Preceding
+----------------------------------------------------
+DROP TABLE IF EXISTS CustomerOrders;
 GO
 
-CREATE TABLE #CustomerOrders
+CREATE TABLE CustomerOrders
 (
 OrderID     INTEGER,
 CustomerID  INTEGER,
@@ -1015,20 +881,20 @@ PRIMARY KEY (OrderID, CustomerID)
 );
 GO
 
-INSERT INTO #CustomerOrders (OrderID, CustomerID, Quantity) VALUES 
+INSERT INTO CustomerOrders (OrderID, CustomerID, Quantity) VALUES 
 (1,1001,5),(2,1001,8),(3,1001,3),(4,1001,7),
 (1,2002,4),(2,2002,9);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #44
-Slowly Changing Dimension Part I
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Balances;
+----------------------------------------------------
+-- DDL for Puzzle #44 & #45: Slowly Changing Dimension
+----------------------------------------------------
+DROP TABLE IF EXISTS Balances44;
+DROP TABLE IF EXISTS Balances45;
 GO
 
-CREATE TABLE #Balances
+-- Renamed from #Balances to avoid confusion
+CREATE TABLE Balances44
 (
 CustomerID   INTEGER,
 BalanceDate  DATE,
@@ -1037,28 +903,14 @@ PRIMARY KEY (CustomerID, BalanceDate)
 );
 GO
 
-INSERT INTO #Balances (CustomerID, BalanceDate, Amount) VALUES
-(1001,'10/11/2021',54.32),
-(1001,'10/10/2021',17.65),
-(1001,'9/18/2021',65.56),
-(1001,'9/12/2021',56.23),
-(1001,'9/1/2021',42.12),
-(2002,'10/15/2021',46.52),
-(2002,'10/13/2021',7.65),
-(2002,'9/15/2021',75.12),
-(2002,'9/10/2021',47.34),
+INSERT INTO Balances44 (CustomerID, BalanceDate, Amount) VALUES
+(1001,'10/11/2021',54.32),(1001,'10/10/2021',17.65),(1001,'9/18/2021',65.56),
+(1001,'9/12/2021',56.23),(1001,'9/1/2021',42.12),(2002,'10/15/2021',46.52),
+(2002,'10/13/2021',7.65),(2002,'9/15/2021',75.12),(2002,'9/10/2021',47.34),
 (2002,'9/2/2021',11.11);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #45
-Slowly Changing Dimension Part 2
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Balances;
-GO
-
-CREATE TABLE #Balances
+CREATE TABLE Balances45
 (
 CustomerID  INTEGER,
 StartDate   DATE,
@@ -1068,24 +920,19 @@ PRIMARY KEY (CustomerID, StartDate)
 );
 GO
 
-INSERT INTO #Balances (CustomerID, StartDate, EndDate, Amount) VALUES
-(1001,'10/11/2021','12/31/9999',54.32),
-(1001,'10/10/2021','10/10/2021',17.65),
-(1001,'9/18/2021','10/12/2021',65.56),
-(2002,'9/12/2021','9/17/2021',56.23),
-(2002,'9/1/2021','9/17/2021',42.12),
-(2002,'8/15/2021','8/31/2021',16.32);
+INSERT INTO Balances45 (CustomerID, StartDate, EndDate, Amount) VALUES
+(1001,'10/11/2021','12/31/9999',54.32),(1001,'10/10/2021','10/10/2021',17.65),
+(1001,'9/18/2021','10/12/2021',65.56),(2002,'9/12/2021','9/17/2021',56.23),
+(2002,'9/1/2021','9/17/2021',42.12),(2002,'8/15/2021','8/31/2021',16.32);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #46
-Positive Account Balances
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #AccountBalances;
+----------------------------------------------------
+-- DDL for Puzzle #46: Positive Account Balances
+----------------------------------------------------
+DROP TABLE IF EXISTS AccountBalances;
 GO
 
-CREATE TABLE #AccountBalances
+CREATE TABLE AccountBalances
 (
 AccountID  INTEGER,
 Balance    MONEY,
@@ -1093,23 +940,22 @@ PRIMARY KEY (AccountID, Balance)
 );
 GO
 
-INSERT INTO #AccountBalances (AccountID, Balance) VALUES
+INSERT INTO AccountBalances (AccountID, Balance) VALUES
 (1001,234.45),(1001,-23.12),(2002,-93.01),(2002,-120.19),
 (3003,186.76), (3003,90.23), (3003,10.11);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #47
-Work Schedule
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Schedule;
-DROP TABLE IF EXISTS #Activity;
-DROP TABLE IF EXISTS #ScheduleTimes;
-DROP TABLE IF EXISTS #ActivityCoalesce
+----------------------------------------------------
+-- DDL for Puzzle #47: Work Schedule
+----------------------------------------------------
+DROP TABLE IF EXISTS Schedule;
+DROP TABLE IF EXISTS Activity;
+DROP TABLE IF EXISTS ScheduleTimes;
+DROP TABLE IF EXISTS ActivityCoalesce;
 GO
 
-CREATE TABLE #Schedule
+-- Removed # prefix from table names and foreign key references
+CREATE TABLE Schedule
 (
 ScheduleID  CHAR(1) PRIMARY KEY,
 StartTime   DATETIME NOT NULL,
@@ -1117,9 +963,9 @@ EndTime     DATETIME NOT NULL
 );
 GO
 
-CREATE TABLE #Activity
+CREATE TABLE Activity
 (
-ScheduleID    CHAR(1) REFERENCES #Schedule (ScheduleID),
+ScheduleID    CHAR(1) REFERENCES Schedule (ScheduleID),
 ActivityName  VARCHAR(100),
 StartTime     DATETIME,
 EndTime       DATETIME,
@@ -1127,27 +973,26 @@ PRIMARY KEY (ScheduleID, ActivityName, StartTime, EndTime)
 );
 GO
 
-INSERT INTO #Schedule (ScheduleID, StartTime, EndTime) VALUES
+INSERT INTO Schedule (ScheduleID, StartTime, EndTime) VALUES
 ('A',CAST('2021-10-01 10:00:00' AS DATETIME),CAST('2021-10-01 15:00:00' AS DATETIME)),
 ('B',CAST('2021-10-01 10:15:00' AS DATETIME),CAST('2021-10-01 12:15:00' AS DATETIME));
 GO
 
-INSERT INTO #Activity (ScheduleID, ActivityName, StartTime, EndTime) VALUES
+INSERT INTO Activity (ScheduleID, ActivityName, StartTime, EndTime) VALUES
 ('A','Meeting',CAST('2021-10-01 10:00:00' AS DATETIME),CAST('2021-10-01 10:30:00' AS DATETIME)),
 ('A','Break',CAST('2021-10-01 12:00:00' AS DATETIME),CAST('2021-10-01 12:30:00' AS DATETIME)),
 ('A','Meeting',CAST('2021-10-01 13:00:00' AS DATETIME),CAST('2021-10-01 13:30:00' AS DATETIME)),
 ('B','Break',CAST('2021-10-01 11:00:00'AS DATETIME),CAST('2021-10-01 11:15:00' AS DATETIME));
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #48
-Consecutive Sales
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Sales;
+----------------------------------------------------
+-- DDL for Puzzle #48: Consecutive Sales
+----------------------------------------------------
+DROP TABLE IF EXISTS Sales48;
 GO
 
-CREATE TABLE #Sales
+-- Renamed from #Sales to prevent conflict with other puzzles
+CREATE TABLE Sales48
 (
 SalesID  INTEGER,
 [Year]   INTEGER,
@@ -1155,20 +1000,18 @@ PRIMARY KEY (SalesID, [Year])
 );
 GO
 
-INSERT INTO #Sales (SalesID, [Year]) VALUES
+INSERT INTO Sales48 (SalesID, [Year]) VALUES
 (1001,2018),(1001,2019),(1001,2020),(2002,2020),(2002,2021),
 (3003,2018),(3003,2020),(3003,2021),(4004,2019),(4004,2020),(4004,2021);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #49
-Sumo Wrestlers
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #ElevatorOrder;
+----------------------------------------------------
+-- DDL for Puzzle #49: Sumo Wrestlers
+----------------------------------------------------
+DROP TABLE IF EXISTS ElevatorOrder;
 GO
 
-CREATE TABLE #ElevatorOrder
+CREATE TABLE ElevatorOrder
 (
 LineOrder  INTEGER PRIMARY KEY,
 [Name]     VARCHAR(100) NOT NULL,
@@ -1176,21 +1019,19 @@ LineOrder  INTEGER PRIMARY KEY,
 );
 GO
 
-INSERT INTO #ElevatorOrder ([Name], [Weight], LineOrder)
+INSERT INTO ElevatorOrder ([Name], [Weight], LineOrder)
 VALUES
 ('Haruto',611,1),('Minato',533,2),('Haruki',623,3),
 ('Sota',569,4),('Aoto',610,5),('Hinata',525,6);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #50
-Baseball Balls and Strikes
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Pitches;
+----------------------------------------------------
+-- DDL for Puzzle #50: Baseball Balls and Strikes
+----------------------------------------------------
+DROP TABLE IF EXISTS Pitches;
 GO
 
-CREATE TABLE #Pitches
+CREATE TABLE Pitches
 (
 BatterID     INTEGER,
 PitchNumber  INTEGER,
@@ -1199,7 +1040,7 @@ PRIMARY KEY (BatterID, PitchNumber)
 );
 GO
 
-INSERT INTO #Pitches (BatterID, PitchNumber, Result) VALUES
+INSERT INTO Pitches (BatterID, PitchNumber, Result) VALUES
 (1001,1,'Foul'), (1001,2,'Foul'),(1001,3,'Ball'),(1001,4,'Ball'),(1001,5,'Strike'),
 (2002,1,'Ball'),(2002,2,'Strike'),(2002,3,'Foul'),(2002,4,'Foul'),(2002,5,'Foul'),
 (2002,6,'In Play'),(3003,1,'Ball'),(3003,2,'Ball'),(3003,3,'Ball'),
@@ -1207,15 +1048,13 @@ INSERT INTO #Pitches (BatterID, PitchNumber, Result) VALUES
 (4004,4,'Foul'),(4004,5,'Foul'),(4004,6,'Strike');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #51
-Primary Key Creation
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Assembly;
+----------------------------------------------------
+-- DDL for Puzzle #51: Primary Key Creation
+----------------------------------------------------
+DROP TABLE IF EXISTS Assembly;
 GO
 
-CREATE TABLE #Assembly
+CREATE TABLE Assembly
 (
 AssemblyID  INTEGER,
 Part        VARCHAR(100),
@@ -1223,34 +1062,18 @@ PRIMARY KEY (AssemblyID, Part)
 );
 GO
 
-INSERT INTO #Assembly (AssemblyID, Part) VALUES
+INSERT INTO Assembly (AssemblyID, Part) VALUES
 (1001,'Bolt'),(1001,'Screw'),(2002,'Nut'),
 (2002,'Washer'),(3003,'Toggle'),(3003,'Bolt');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #52
-Phone Numbers Table
-*/----------------------------------------------------
-
-/*
-No DDL provided
-
-You are creating a table that customer agents will use to enter customer information and their phone numbers.
-Create a table with the fields Customer ID and Phone Number, where the Phone Number field must be inserted with the format (999)-999-9999.
-Agents will enter phone numbers into this table via a form, and it is imperative that phone numbers are formatted correctly when inputted.  
-Create a table that meets these requirements. 
-*/
-
-/*----------------------------------------------------
-DDL for Puzzle #53
-Spouse IDs
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Spouses;
+----------------------------------------------------
+-- DDL for Puzzle #53: Spouse IDs
+----------------------------------------------------
+DROP TABLE IF EXISTS Spouses;
 GO
 
-CREATE TABLE #Spouses
+CREATE TABLE Spouses
 (
 PrimaryID  VARCHAR(100),
 SpouseID   VARCHAR(100),
@@ -1258,32 +1081,29 @@ PRIMARY KEY (PrimaryID, SpouseID)
 );
 GO
 
-INSERT INTO #Spouses (PrimaryID, SpouseID) VALUES
-('Pat','Charlie'),('Jordan','Casey'),
-('Ashley','Dee'),('Charlie','Pat'),
-('Casey','Jordan'),('Dee','Ashley');
+INSERT INTO Spouses (PrimaryID, SpouseID) VALUES
+('Pat','Charlie'),('Jordan','Casey'),('Ashley','Dee'),
+('Charlie','Pat'),('Casey','Jordan'),('Dee','Ashley');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #54
-Winning Numbers
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #WinningNumbers;
-DROP TABLE IF EXISTS #LotteryTickets;
+----------------------------------------------------
+-- DDL for Puzzle #54: Winning Numbers
+----------------------------------------------------
+DROP TABLE IF EXISTS WinningNumbers;
+DROP TABLE IF EXISTS LotteryTickets;
 GO
 
-CREATE TABLE #WinningNumbers
+CREATE TABLE WinningNumbers
 (
 Number  INTEGER PRIMARY KEY
 );
 GO
 
-INSERT INTO #WinningNumbers (Number) VALUES
+INSERT INTO WinningNumbers (Number) VALUES
 (25),(45),(78);
 GO
 
-CREATE TABLE #LotteryTickets
+CREATE TABLE LotteryTickets
 (
 TicketID  VARCHAR(3),
 Number    INTEGER,
@@ -1291,105 +1111,82 @@ PRIMARY KEY (TicketID, Number)
 );
 GO
 
-INSERT INTO #LotteryTickets (TicketID, Number) VALUES
+INSERT INTO LotteryTickets (TicketID, Number) VALUES
 ('AAA',25),('AAA',45),('AAA',78),
 ('BBB',25),('BBB',45),('BBB',98),
 ('CCC',67),('CCC',86),('CCC',91);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #55
-Table Audit
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #ProductsA;
-DROP TABLE IF EXISTS #ProductsB;
+----------------------------------------------------
+-- DDL for Puzzle #55: Table Audit
+----------------------------------------------------
+DROP TABLE IF EXISTS ProductsA;
+DROP TABLE IF EXISTS ProductsB;
 GO
 
-CREATE TABLE #ProductsA
+CREATE TABLE ProductsA
 (
 ProductName  VARCHAR(100) PRIMARY KEY,
 Quantity     INTEGER NOT NULL
 );
 GO
 
-CREATE TABLE #ProductsB
+CREATE TABLE ProductsB
 (
 ProductName  VARCHAR(100) PRIMARY KEY,
 Quantity     INTEGER NOT NULL
 );
 GO
 
-INSERT INTO #ProductsA (ProductName, Quantity) VALUES
-('Widget',7),
-('Doodad',9),
-('Gizmo',3);
+INSERT INTO ProductsA (ProductName, Quantity) VALUES
+('Widget',7),('Doodad',9),('Gizmo',3);
 GO
 
-INSERT INTO #ProductsB (ProductName, Quantity) VALUES
-('Widget',7),
-('Doodad',6),
-('Dingbat',9);
+INSERT INTO ProductsB (ProductName, Quantity) VALUES
+('Widget',7),('Doodad',6),('Dingbat',9);
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #56
-Numbers Using Recursion
-*/----------------------------------------------------
-
-/*
-No DDL provided
-
-Create a numbers table using recursion
-*/
-
-/*----------------------------------------------------
-DDL for Puzzle #57
-Find The Spaces
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Strings;
+----------------------------------------------------
+-- DDL for Puzzle #57: Find The Spaces
+----------------------------------------------------
+DROP TABLE IF EXISTS Strings;
 GO
 
-CREATE TABLE #Strings
+CREATE TABLE Strings
 (
 QuoteId  INTEGER IDENTITY(1,1) PRIMARY KEY,
 String   VARCHAR(100) NOT NULL
 );
 GO
 
-INSERT INTO #Strings (String) VALUES
+INSERT INTO Strings (String) VALUES
 ('SELECT EmpID FROM Employees;'),('SELECT * FROM Transactions;');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #58
-Add Them Up
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Equations;
+----------------------------------------------------
+-- DDL for Puzzle #58: Add Them Up
+----------------------------------------------------
+DROP TABLE IF EXISTS Equations;
 GO
 
-CREATE TABLE #Equations
+CREATE TABLE Equations
 (
 Equation  VARCHAR(200) PRIMARY KEY,
 TotalSum  INT NULL
 );
 GO
 
-INSERT INTO #Equations (Equation) VALUES
+INSERT INTO Equations (Equation) VALUES
 ('123'),('1+2+3'),('1+2-3'),('1+23'),('1-2+3'),('1-2-3'),('1-23'),('12+3'),('12-3');
 GO
 
-/*----------------------------------------------------
-DDL for Puzzle #59
-Balanced String
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #BalancedString;
+----------------------------------------------------
+-- DDL for Puzzle #59: Balanced String
+----------------------------------------------------
+DROP TABLE IF EXISTS BalancedString;
 GO
 
-CREATE TABLE #BalancedString
+CREATE TABLE BalancedString
 (
 RowNumber        INTEGER IDENTITY(1,1) PRIMARY KEY,
 ExpectedOutcome  VARCHAR(50),
@@ -1398,525 +1195,9 @@ UpdateString     VARCHAR(50)
 );
 GO
 
-INSERT INTO #BalancedString (ExpectedOutcome, MatchString) VALUES
-('Balanced','( )'),
-('Balanced','[]'),
-('Balanced','{}'),
-('Balanced','( ( { [] } ) )'),
-('Balanced','( ) [ ]'),
-('Balanced','( { } )'),
-('Unbalanced','( { ) }'),
-('Unbalanced','( { ) }}}()'),
-('Unbalanced','}{()][');
+INSERT INTO BalancedString (ExpectedOutcome, MatchString) VALUES
+('Balanced','( )'),('Balanced','[]'),('Balanced','{}'),
+('Balanced','( ( { [] } ) )'),('Balanced','( ) [ ]'),
+('Balanced','( { } )'),('Unbalanced','( { ) }'),
+('Unbalanced','( { ) }}}()'),('Unbalanced','}{()][');
 GO
-
-/*----------------------------------------------------
-DDL for Puzzle #60
-Products Without Duplicates
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Products;
-GO
-
-CREATE TABLE #Products
-(
-Product      VARCHAR(10),
-ProductCode  VARCHAR(2),
-PRIMARY KEY (Product, ProductCode)
-);
-GO
-
-INSERT INTO #Products (Product, ProductCode) VALUES
-('Alpha','01'),
-('Alpha','02'),
-('Bravo','03'),
-('Charlie','02');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #61
-Player Scores
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #PlayerScores;
-GO
-
-CREATE TABLE #PlayerScores
-(
-AttemptID  INTEGER,
-PlayerID   INTEGER,
-Score      INTEGER,
-PRIMARY KEY (AttemptID, PlayerID)
-);
-GO
-
-INSERT INTO #PlayerScores (AttemptID, PlayerID, Score) VALUES
-(1,1001,2),(2,1001,7),(3,1001,8),(1,2002,6),(2,2002,9),(3,2002,7);
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #62
-Car and Boat Purchase
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Vehicles;
-GO
-
-CREATE TABLE #Vehicles (
-VehicleID  INTEGER PRIMARY KEY,
-[Type]     VARCHAR(20),
-Model      VARCHAR(20),
-Price      MONEY
-);
-GO
-
-INSERT INTO #Vehicles (VehicleID, [Type], Model, Price) VALUES
-(1, 'Car','Rolls-Royce Phantom', 460000),
-(2, 'Car','Cadillac CT5', 39000),
-(3, 'Car','Porsche Boxster', 63000),
-(4, 'Car','Lamborghini Spyder', 290000),
-(5, 'Boat','Malibu', 210000),
-(6, 'Boat', 'ATX 22-S', 85000),
-(7, 'Boat', 'Sea Ray SLX', 520000),
-(8, 'Boat', 'Mastercraft', 25000);
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #63
-Promotions
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Promotions;
-GO
-
-CREATE TABLE #Promotions (
-OrderID   INTEGER NOT NULL,
-Product   VARCHAR(255) NOT NULL,
-Discount  VARCHAR(255)
-);
-GO
-
-INSERT INTO #Promotions (OrderID, Product, Discount) VALUES 
-(1, 'Item1', 'PROMO'),
-(1, 'Item1', 'PROMO'),
-(1, 'Item1', 'MARKDOWN'),
-(1, 'Item2', 'PROMO'),
-(2, 'Item2', NULL),
-(2, 'Item3', 'MARKDOWN'),
-(2, 'Item3', NULL),
-(3, 'Item1', 'PROMO'),
-(3, 'Item1', 'PROMO'),
-(3, 'Item1', 'PROMO');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #64
-Between Quotes
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Strings;
-GO
-
-CREATE TABLE #Strings
-(
-ID      INTEGER IDENTITY(1,1) PRIMARY KEY,
-String  VARCHAR(256) NOT NULL
-);
-GO
-
-INSERT INTO #Strings (String) VALUES
-('"12345678901234"'),
-('1"2345678901234"'),
-('123"45678"901234"'),
-('123"45678901234"'),
-('12345678901"234"'),
-('12345678901234');
-GO
-       
-/*----------------------------------------------------
-DDL for Puzzle #65
-Home Listings
-*/----------------------------------------------------
-       
-DROP TABLE IF EXISTS #HomeListings;
-GO
-
-CREATE TABLE #HomeListings
-(
-ListingID  INTEGER PRIMARY KEY,
-HomeID     VARCHAR(100),
-Status     VARCHAR(100)
-);
-GO
-
-INSERT INTO #HomeListings (ListingID, HomeID, Status) VALUES 
-(1, 'Home A', 'New Listing'),
-(2, 'Home A', 'Pending'),
-(3, 'Home A', 'Relisted'),
-(4, 'Home B', 'New Listing'),
-(5, 'Home B', 'Under Contract'),
-(6, 'Home B', 'Relisted'),
-(7, 'Home C', 'New Listing'),
-(8, 'Home C', 'Under Contract'),
-(9, 'Home C', 'Closed');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #66
-Matching Parts
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Parts;
-GO
-
-CREATE TABLE #Parts 
-(
-SerialNumber    VARCHAR(100) PRIMARY KEY,
-ManufactureDay  INTEGER,
-Product         VARCHAR(100)
-);
-GO
-
-INSERT INTO #Parts (SerialNumber, ManufactureDay, Product) VALUES 
-('A111', 1, 'Bolt'),
-('B111', 3, 'Bolt'),
-('C111', 5, 'Bolt'),
-('D222', 2, 'Washer'),
-('E222', 4, 'Washer'),
-('F222', 6, 'Washer'),
-('G333', 3, 'Nut'),
-('H333', 5, 'Nut'),
-('I333', 7, 'Nut');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #67
-Matching Birthdays
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Students;
-GO
-
-CREATE TABLE #Students
-(
-StudentName  VARCHAR(50) PRIMARY KEY,
-Birthday     DATE
-);
-GO
-
-INSERT INTO #Students (StudentName, Birthday) VALUES 
-('Susan', '2015-04-15'),
-('Tim', '2015-04-15'),
-('Jacob', '2015-04-15'),
-('Earl', '2015-02-05'),
-('Mike', '2015-05-23'),
-('Angie', '2015-05-23'),
-('Jenny', '2015-11-19'),
-('Michelle', '2015-12-12'),
-('Aaron', '2015-12-18');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #68
-Removing Outliers
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Teams;
-GO
-
-CREATE TABLE #Teams (
-Team    VARCHAR(50),
-[Year]  INTEGER,
-Score   INTEGER,
-PRIMARY KEY (Team, Year)
-);
-GO
-
-INSERT INTO #Teams (Team, [Year], Score) VALUES
-('Cougars', 2015, 50),
-('Cougars', 2016, 45),
-('Cougars', 2017, 65),
-('Cougars', 2018, 92),
-('Bulldogs', 2015, 65),
-('Bulldogs', 2016, 60),
-('Bulldogs', 2017, 58),
-('Bulldogs', 2018, 12);
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #69
-Splitting a Hierarchy
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #OrganizationChart;
-GO
-
-CREATE TABLE #OrganizationChart
-(
-ManagerID   CHAR(1),
-EmployeeID  CHAR(1) NOT NULL PRIMARY KEY
-);
-GO
-
-INSERT INTO #OrganizationChart (ManagerID, EmployeeID) VALUES
-(NULL, 'A'),
-('A', 'B'),
-('A', 'C'),
-('B', 'D'),
-('B', 'E'),
-('D', 'G'),
-('C', 'F');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #70
-Student Facts
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Students;
-GO
-
-CREATE TABLE #Students
-(
-ParentID  INTEGER NOT NULL,
-ChildID   CHAR(1) PRIMARY KEY,
-Age       INTEGER NOT NULL,
-Gender    CHAR(1) NOT NULL
-);
-GO
-
-INSERT INTO #Students (ParentID, ChildID, Age, Gender) VALUES
-(1001, 'A', 8, 'M'),
-(1001, 'B', 12, 'F'),
-(2002, 'C', 7, 'F'),
-(2002, 'D', 9, 'F'),
-(2002, 'E', 14, 'M'),
-(3003, 'F', 12, 'F'),
-(3003, 'G', 14, 'M'),
-(4004, 'H', 7, 'M');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #71
-Employee Validation
-*/----------------------------------------------------
-
---Note this puzzle uses permanent tables
---Setting the database to use "test" to avoid possible issues
-
-USE test;
-GO
-
-DROP TABLE IF EXISTS TemporaryEmployees;
-DROP TABLE IF EXISTS PermanentEmployees;
-DROP TABLE IF EXISTS Employees;
-GO
-
-CREATE TABLE TemporaryEmployees
-(
-EmployeeID  INTEGER PRIMARY KEY,
-Department  VARCHAR(50) NOT NULL
-);
-GO
-
-CREATE TABLE PermanentEmployees
-(
-EmployeeID  INTEGER PRIMARY KEY,
-Department  VARCHAR(50) NOT NULL
-);
-GO
-
-CREATE TABLE Employees
-(
-EmployeeID  INTEGER PRIMARY KEY,
-[Name]      VARCHAR(50) NOT NULL
-);
-GO
-
-INSERT INTO TemporaryEmployees (EmployeeID, Department) VALUES
-(1001, 'Engineering'),
-(2002, 'Sales'),
-(3003, 'Marketing');
-GO
-
-INSERT INTO PermanentEmployees (EmployeeID, Department) VALUES
-(4004, 'Marketing'),
-(5005, 'Accounting'),
-(6006, 'Accounting');
-GO
-
-INSERT INTO Employees (EmployeeID, [Name]) VALUES
-(1001, 'John'),
-(2002, 'Eric'),
-(3003, 'Jennifer'),
-(4004, 'Bob'),
-(5005, 'Stuart'),
-(6006, 'Angie');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #72
-Under Warranty
-*/----------------------------------------------------
-
-DROP TABLE IF EXISTS #Repairs;
-GO
-
-CREATE TABLE #Repairs (
-RepairID    INTEGER PRIMARY KEY,
-CustomerID  CHAR(1) NOT NULL,
-RepairDate  DATE NOT NULL
-);
-GO
-
-INSERT INTO #Repairs (RepairID, CustomerID, RepairDate) VALUES
-(1001,'A','2023-01-01'),
-(2002,'A','2023-01-15'),
-(3003,'A','2023-01-17'),
-(4004,'A','2023-03-24'),
-(5005,'A','2023-04-01'),
-(6006,'B','2023-06-22'),
-(7007,'B','2023-06-23'),
-(8008,'B','2023-09-01');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #73
-Distinct Statuses
-*/----------------------------------------------------
-DROP TABLE IF EXISTS #WorkflowSteps;
-GO
-
-CREATE TABLE #WorkflowSteps
-(
-StepID    INTEGER PRIMARY KEY,
-Workflow  VARCHAR(50),
-[Status]  VARCHAR(50)
-);
-GO
-
-INSERT INTO #WorkflowSteps (StepID, Workflow, [Status]) VALUES
-(1, 'Alpha', 'Open'),
-(2, 'Alpha', 'Open'),
-(3, 'Alpha', 'Inactive'),
-(4, 'Alpha', 'Open'),
-(5, 'Bravo', 'Closed'),
-(6, 'Bravo', 'Closed'),
-(7, 'Bravo', 'Open'),
-(8, 'Bravo', 'Inactive');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #74
-Bowling League
-*/----------------------------------------------------
-DROP TABLE IF EXISTS #BowlingResults;
-GO
-
-CREATE TABLE #BowlingResults 
-(
-GameID  INTEGER,
-Bowler  VARCHAR(50),
-Score   INTEGER,
-PRIMARY KEY (GameID, Bowler)
-);
-GO
-
-INSERT INTO #BowlingResults (GameID, Bowler, Score) VALUES
-(1, 'John', 167),
-(1, 'Susan', 139),
-(1, 'Ralph', 95),
-(1, 'Mary', 90),
-(2, 'Susan', 187),
-(2, 'John', 155),
-(2, 'Dennis', 100),
-(2, 'Anthony', 78);
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #75
-Symmetric Matches
-*/----------------------------------------------------
-DROP TABLE IF EXISTS #Boxes;
-GO
-
-CREATE TABLE #Boxes 
-(
-Box      CHAR(1),
-[Length] INTEGER,
-Width    INTEGER,
-Height   INTEGER
-);
-GO
-
-INSERT INTO #Boxes (Box, [Length], Width, Height) VALUES
-('A', 10, 25, 15),
-('B', 15, 10, 25),
-('C', 10, 16, 24);
-
-/*----------------------------------------------------
-DDL for Puzzle #76
-Determine Batches
-*/----------------------------------------------------
-DROP TABLE IF EXISTS #BatchStarts;
-DROP TABLE IF EXISTS #BatchLines;
-GO
-
-CREATE TABLE #BatchStarts
-(
-Batch       CHAR(1),
-BatchStart  INTEGER,
-PRIMARY KEY (Batch, BatchStart)
-);
-GO
-
-CREATE TABLE #BatchLines
-(
-Batch   CHAR(1),
-Line    INTEGER,
-Syntax  VARCHAR(MAX),
-PRIMARY KEY (Batch, Line)
-);
-GO
-
-INSERT INTO #BatchStarts (Batch, BatchStart) VALUES
-('A', 1),
-('A', 5);
-GO
-
-INSERT INTO #BatchLines (Batch, Line, Syntax) VALUES
-('A', 1, 'SELECT *'),
-('A', 2, 'FROM Account;'),
-('A', 3, 'GO'),
-('A', 4, ''),
-('A', 5, 'TRUNCATE TABLE Accounts;'),
-('A', 6, 'GO');
-GO
-
-/*----------------------------------------------------
-DDL for Puzzle #77
-Temperature Readings
-*/----------------------------------------------------
-DROP TABLE IF EXISTS #TemperatureData;
-GO
-
-CREATE TABLE #TemperatureData
-(
-TempID     INTEGER PRIMARY KEY,
-TempValue  INTEGER NULL
-);
-GO
-
-INSERT INTO #TemperatureData (TempID, TempValue) VALUES
-(1,52),(2,NULL),(3,NULL),(4,65),(5,NULL),(6,72),
-(7,NULL),(8,70),(9,NULL),(10,75),(11,NULL),(12,80);
-GO
-
-/*----------------------------------------------------
-The End
-*/----------------------------------------------------
-
-
-
-
-
